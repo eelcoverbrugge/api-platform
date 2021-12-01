@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CheeseListingRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Carbon\Carbon;
 
 /**
  * @ApiResource(
@@ -92,6 +93,11 @@ class CheeseListing
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
+    }
+
+    public function getCreatedAtAgo()
+    {
+        return Carbon::instance($this->getCreatedAt())->diffForHumans();
     }
 
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
